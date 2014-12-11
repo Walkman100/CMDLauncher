@@ -1,6 +1,6 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.InstCheck And My.Application.CommandLineArgs.Item(0) <> "noCheck" Then
+        If My.Settings.InstCheck And My.Application.CommandLineArgs.Count > 0 And My.Application.CommandLineArgs.Item(0) <> "noCheck" Then
             If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
                 Dim answer As Integer
                 answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
