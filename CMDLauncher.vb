@@ -1,5 +1,36 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If My.Settings.InstCheck Then
+            If Environment.GetEnvironmentVariable("windir") & "\System32" <> Environment.CurrentDirectory Then
+                Dim answer As Integer
+                answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "\System32! If it is moved, Windows will not know its location and won't be able to launch bat files." _
+                                & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
+                If answer = MsgBoxResult.Yes Then
+                    Try
+                        Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd", "xcopy " & _
+                                      Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                      Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                    Catch
+                        For i = 0 To My.Computer.FileSystem.GetFiles(Environment.GetEnvironmentVariable("windir"), FileIO.SearchOption.SearchAllSubDirectories, "sudo.cmd").Count
+                            Try
+                                Process.Start(My.Computer.FileSystem.GetFiles(Environment.GetEnvironmentVariable("windir"), FileIO.SearchOption.SearchAllSubDirectories, "sudo.cmd").Item(i), "xcopy " & _
+                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                              Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                            Catch
+                                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
+                                Process.Start("sudo.cmd", "xcopy " & _
+                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                              Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                            End Try
+                        Next
+                    End Try
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                ElseIf answer = MsgBoxResult.Cancel Then
+                    My.Settings.InstCheck = False
+                End If
+            End If
+        End If
+
         For Each s As String In My.Application.CommandLineArgs
             Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
             Application.Exit()
