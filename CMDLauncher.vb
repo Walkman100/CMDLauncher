@@ -9,20 +9,12 @@
                     Try
                         Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd", "xcopy " & _
                                       Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                      Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                                      Environment.GetEnvironmentVariable("windir") & "\System32\")
                     Catch
-                        For i = 0 To My.Computer.FileSystem.GetFiles(Environment.GetEnvironmentVariable("windir"), FileIO.SearchOption.SearchAllSubDirectories, "sudo.cmd").Count
-                            Try
-                                Process.Start(My.Computer.FileSystem.GetFiles(Environment.GetEnvironmentVariable("windir"), FileIO.SearchOption.SearchAllSubDirectories, "sudo.cmd").Item(i), "xcopy " & _
-                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                              Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
-                            Catch
-                                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
-                                Process.Start("sudo.cmd", "xcopy " & _
-                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                              Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
-                            End Try
-                        Next
+                        My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
+                        Process.Start("sudo.cmd", "xcopy " & _
+                                      Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                      Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
                     End Try
                     Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
                 ElseIf answer = MsgBoxResult.Cancel Then
