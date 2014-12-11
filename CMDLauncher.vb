@@ -15,7 +15,7 @@
     End Sub
 
     Private Sub lnkFlag_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkFlag.LinkClicked
-        MsgBox("/k: Leave CMD window open after running script; /c: Close CMD after running script.", MsgBoxStyle.Information, "CMD Flag Info")
+        MsgBox("/k: Leave CMD window open after running script" & vbNewLine & "/c: Close CMD after running script", MsgBoxStyle.Information, "CMD Flag Info")
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
@@ -30,5 +30,9 @@
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Application.Exit()
+    End Sub
+
+    Private Sub btnOpenWith_Click(sender As Object, e As EventArgs) Handles btnOpenWith.Click
+        Process.Start("rundll32", "C:\Windows\system32\shell32.dll,OpenAs_RunDLL .bat")
     End Sub
 End Class
