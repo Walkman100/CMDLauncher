@@ -1,33 +1,35 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.InstCheck And My.Application.CommandLineArgs.Count > 0 And My.Application.CommandLineArgs.Item(0) <> "noCheck" Then
-            If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
-                Dim answer As Integer
-                answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
-                                & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
-                If answer = MsgBoxResult.Yes Then
-                    Try
-                        Shell("sudo.cmd xcopy " & _
-                                      Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                      Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
-                    Catch
+        If My.Settings.InstCheck And My.Application.CommandLineArgs.Count > 0 Then
+            If My.Application.CommandLineArgs.Item(0) <> "noCheck" Then
+                If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
+                    Dim answer As Integer
+                    answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
+                                    & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
+                    If answer = MsgBoxResult.Yes Then
                         Try
-                            '                                                       Because there's no harm trying.
-                            Shell(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd xcopy " & _
-                                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                          Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
-                        Catch
-                            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
                             Shell("sudo.cmd xcopy " & _
                                           Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
                                           Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
+                        Catch
+                            Try
+                                '                                                       Because there's no harm trying.
+                                Shell(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd xcopy " & _
+                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                              Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
+                            Catch
+                                My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
+                                Shell("sudo.cmd xcopy " & _
+                                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                              Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
+                            End Try
                         End Try
-                    End Try
-                    Threading.Thread.Sleep(100)
-                    Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe noCheck", vbNormalFocus, False)
-                    Application.Exit()
-                ElseIf answer = MsgBoxResult.Cancel Then
-                    My.Settings.InstCheck = False
+                        Threading.Thread.Sleep(100)
+                        Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe noCheck", vbNormalFocus, False)
+                        Application.Exit()
+                    ElseIf answer = MsgBoxResult.Cancel Then
+                        My.Settings.InstCheck = False
+                    End If
                 End If
             End If
         End If
