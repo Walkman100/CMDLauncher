@@ -7,23 +7,24 @@
                                 & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
                 If answer = MsgBoxResult.Yes Then
                     Try
-                        Process.Start("sudo", "xcopy " & _
+                        Shell("sudo.cmd xcopy " & _
                                       Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                      Environment.GetEnvironmentVariable("windir") & "\")
+                                      Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
                     Catch
                         Try
                             '                                                       Because there's no harm trying.
-                            Process.Start(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd", "xcopy " & _
+                            Shell(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd xcopy " & _
                                           Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                          Environment.GetEnvironmentVariable("windir") & "\")
+                                          Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
                         Catch
                             My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
-                            Process.Start("sudo.cmd", "xcopy " & _
+                            Shell("sudo.cmd xcopy " & _
                                           Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                          Environment.GetEnvironmentVariable("windir") & "\")
+                                          Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
                         End Try
                     End Try
-                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe")
+                    Threading.Thread.Sleep(100)
+                    Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe")
                     Application.Exit()
                 ElseIf answer = MsgBoxResult.Cancel Then
                     My.Settings.InstCheck = False
