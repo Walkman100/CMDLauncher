@@ -1,6 +1,6 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If My.Settings.InstCheck Then
+        If My.Settings.InstCheck And My.Application.CommandLineArgs.Item(0) <> "noCheck" Then
             If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
                 Dim answer As Integer
                 answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
@@ -24,7 +24,7 @@
                         End Try
                     End Try
                     Threading.Thread.Sleep(100)
-                    Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe")
+                    Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe noCheck", vbNormalFocus, False)
                     Application.Exit()
                 ElseIf answer = MsgBoxResult.Cancel Then
                     My.Settings.InstCheck = False
@@ -33,8 +33,10 @@
         End If
 
         For Each s As String In My.Application.CommandLineArgs
-            Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
-            Application.Exit()
+            If s <> "noCheck" Then
+                Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
+                Application.Exit()
+            End If
         Next
 
         ' If no arguments given
