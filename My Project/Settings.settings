@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Flag" Type="System.String" Scope="User">
-      <Value Profile="(Default)">/k</Value>
+      <Value Profile="(Default)">/c</Value>
     </Setting>
   </Settings>
 </SettingsFile>

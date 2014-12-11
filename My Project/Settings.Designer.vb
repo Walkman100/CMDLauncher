@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("/k")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("/c")>  _
         Public Property Flag() As String
             Get
                 Return CType(Me("Flag"),String)

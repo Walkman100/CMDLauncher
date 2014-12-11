@@ -1,6 +1,17 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        For Each s As String In My.Application.CommandLineArgs
+            Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
+            Application.Exit()
+        Next
 
+        ' If no arguments given
+        If My.Settings.Flag = "/c" Then
+            optC.Checked = True
+        End If
+        If My.Settings.Flag = "/k" Then
+            optK.Checked = True
+        End If
     End Sub
 
     Private Sub lnkFlag_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkFlag.LinkClicked
@@ -14,6 +25,7 @@
         If optK.Checked = True Then
             My.Settings.Flag = "/k"
         End If
+        Application.Exit()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
