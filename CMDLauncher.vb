@@ -42,7 +42,7 @@
                               Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
                     End Try
                 End Try
-                Threading.Thread.Sleep(100)
+                Threading.Thread.Sleep(500)
                 Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe noCheck", vbNormalFocus, False)
                 Application.Exit()
             ElseIf answer = MsgBoxResult.Cancel Then
