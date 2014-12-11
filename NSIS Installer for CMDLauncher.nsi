@@ -14,7 +14,7 @@ LicenseData "LICENSE.md"
 LicenseForceSelection checkbox "I have read and understand this notice"
 LicenseText "Please read the notice below before installing CMDLauncher. If you understand the notice, click the checkbox below and click Next."
 
-InstallDir $SYSDIR
+InstallDir $WINDIR
 
 OutFile "bin\Release\CMDLauncher-Installer.exe"
 

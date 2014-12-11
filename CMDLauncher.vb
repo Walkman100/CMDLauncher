@@ -1,22 +1,30 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If My.Settings.InstCheck Then
-            If Environment.GetEnvironmentVariable("windir") & "\System32" <> Environment.CurrentDirectory Then
+            If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
                 Dim answer As Integer
-                answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "\System32! If it is moved, Windows will not know its location and won't be able to launch bat files." _
+                answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
                                 & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
                 If answer = MsgBoxResult.Yes Then
                     Try
-                        Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd", "xcopy " & _
+                        Process.Start("sudo", "xcopy " & _
                                       Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                      Environment.GetEnvironmentVariable("windir") & "\System32\")
+                                      Environment.GetEnvironmentVariable("windir") & "\")
                     Catch
-                        My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
-                        Process.Start("sudo.cmd", "xcopy " & _
-                                      Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                                      Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                        Try
+                            '                                                       Because there's no harm trying.
+                            Process.Start(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd", "xcopy " & _
+                                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                          Environment.GetEnvironmentVariable("windir") & "\")
+                        Catch
+                            My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
+                            Process.Start("sudo.cmd", "xcopy " & _
+                                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                                          Environment.GetEnvironmentVariable("windir") & "\")
+                        End Try
                     End Try
-                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\System32\CMDLauncher.exe")
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe")
+                    Application.Exit()
                 ElseIf answer = MsgBoxResult.Cancel Then
                     My.Settings.InstCheck = False
                 End If
