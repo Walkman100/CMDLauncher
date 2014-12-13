@@ -59,7 +59,7 @@
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Application.Exit()
+        End
     End Sub
 
     Sub LoadSettings()
@@ -67,9 +67,12 @@
             optC.Checked = True
         ElseIf My.Settings.Flag = "/k" Then
             optK.Checked = True
+        Else
+            optK.Checked = False
+            optC.Checked = False
         End If
         If My.Settings.LaunchMethod = 0 Then
-            optLaunchProcess_Start.Checked = True
+            optLaunchProcessDotStart.Checked = True
         ElseIf My.Settings.LaunchMethod = 1 Then
             optLaunchShell.Checked = True
         End If
@@ -88,6 +91,14 @@
             Case AppWinStyle.Hide
                 cbxLocation.SelectedIndex = 5
         End Select
+        If My.Settings.LaunchOption = 0 Then
+            optLaunchVar.Checked = True
+            txtLaunchVar.Text = My.Settings.LaunchData
+        ElseIf My.Settings.LaunchOption = 1 Then
+            optLaunchFile.Checked = True
+            txtLaunchFile.Text = My.Settings.LaunchData
+        End If
+        optLaunchVar_CheckedChanged()
     End Sub
 
     Sub SetSettings()
@@ -96,7 +107,7 @@
         ElseIf optK.Checked = True Then
             My.Settings.Flag = "/k"
         End If
-        If optLaunchProcess_Start.Checked = True Then
+        If optLaunchProcessDotStart.Checked = True Then
             My.Settings.LaunchMethod = 0
         ElseIf optLaunchShell.Checked = True Then
             My.Settings.LaunchMethod = 1
@@ -115,6 +126,13 @@
             Case 5
                 My.Settings.WindowLocation = AppWinStyle.Hide
         End Select
+        If optLaunchVar.Checked = True Then
+            My.Settings.LaunchOption = 0
+            My.Settings.LaunchData = txtLaunchVar.Text
+        ElseIf optLaunchFile.Checked = True Then
+            My.Settings.LaunchOption = 1
+            My.Settings.LaunchData = txtLaunchFile.Text
+        End If
     End Sub
 
     Private Sub btnOpenWith_Click(sender As Object, e As EventArgs) Handles btnOpenWith.Click
@@ -122,21 +140,23 @@
     End Sub
 
     Private Sub btnAdvanced_Click(sender As Object, e As EventArgs) Handles btnAdvanced.Click
-        If Me.Height = 343 Then ' Show Basic
+        If Me.Height = 418 Then ' Show Basic
             Me.Height = 166
             btnAdvanced.Text = "Advanced"
             btnFlags.Hide()
             btnResetIgnore.Hide()
-            grpLaunch.Hide()
+            grpLaunchMethod.Hide()
             grpLocation.Hide()
+            grpLaunch.Hide()
         Else ' Show Advanced
-            Me.Height = 343
+            Me.Height = 418
             btnAdvanced.Text = "Basic"
             btnFlags.Show()
             btnResetIgnore.Show()
             If My.Settings.InstCheck = False Then btnResetIgnore.Enabled = True
-            grpLaunch.Show()
+            grpLaunchMethod.Show()
             grpLocation.Show()
+            grpLaunch.Show()
         End If
     End Sub
 
@@ -151,6 +171,7 @@
 
     Private Sub btnResetIgnore_Click(sender As Object, e As EventArgs) Handles btnResetIgnore.Click
         My.Settings.InstCheck = True
+        btnResetIgnore.Text = "Reset succesfull! Click Save"
         btnResetIgnore.Enabled = False
     End Sub
 
@@ -161,6 +182,19 @@
 
     Private Sub optLaunchShell_CheckedChanged() Handles optLaunchShell.CheckedChanged
         cbxLocation.Enabled = optLaunchShell.Checked
-        If optLaunchProcess_Start.Checked Then cbxLocation.SelectedIndex = 0
+        If optLaunchProcessDotStart.Checked Then cbxLocation.SelectedIndex = 0
+    End Sub
+
+    Private Sub optLaunchVar_CheckedChanged() Handles optLaunchVar.CheckedChanged
+        txtLaunchVar.Enabled = optLaunchVar.Checked
+        If optLaunchVar.Checked And txtLaunchVar.Text.Count = 0 Then txtLaunchVar.Text = "comspec"
+        txtLaunchFile.Enabled = optLaunchFile.Checked
+        btnLaunchBrowse.Enabled = optLaunchFile.Checked
+        If optLaunchFile.Checked And txtLaunchFile.Text.Count = 0 Then btnLaunchBrowse_Click()
+    End Sub
+
+    Private Sub btnLaunchBrowse_Click() Handles btnLaunchBrowse.Click
+        selectProgram.ShowDialog()
+        txtLaunchFile.Text = selectProgram.FileName
     End Sub
 End Class

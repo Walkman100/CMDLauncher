@@ -101,6 +101,30 @@ Namespace My
                 Me("WindowLocation") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("comspec")>  _
+        Public Property LaunchData() As String
+            Get
+                Return CType(Me("LaunchData"),String)
+            End Get
+            Set
+                Me("LaunchData") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property LaunchOption() As Byte
+            Get
+                Return CType(Me("LaunchOption"),Byte)
+            End Get
+            Set
+                Me("LaunchOption") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

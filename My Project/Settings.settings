@@ -14,5 +14,11 @@
     <Setting Name="WindowLocation" Type="Microsoft.VisualBasic.AppWinStyle" Scope="User">
       <Value Profile="(Default)">NormalFocus</Value>
     </Setting>
+    <Setting Name="LaunchData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">comspec</Value>
+    </Setting>
+    <Setting Name="LaunchOption" Type="System.Byte" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

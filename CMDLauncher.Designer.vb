@@ -33,15 +33,23 @@ Partial Class CMDLauncher
         Me.btnAdvanced = New System.Windows.Forms.Button()
         Me.btnFlags = New System.Windows.Forms.Button()
         Me.btnResetIgnore = New System.Windows.Forms.Button()
-        Me.grpLaunch = New System.Windows.Forms.GroupBox()
+        Me.grpLaunchMethod = New System.Windows.Forms.GroupBox()
         Me.lnkLaunchHelp = New System.Windows.Forms.LinkLabel()
         Me.optLaunchShell = New System.Windows.Forms.RadioButton()
-        Me.optLaunchProcess_Start = New System.Windows.Forms.RadioButton()
+        Me.optLaunchProcessDotStart = New System.Windows.Forms.RadioButton()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.cbxLocation = New System.Windows.Forms.ComboBox()
+        Me.grpLaunch = New System.Windows.Forms.GroupBox()
+        Me.optLaunchVar = New System.Windows.Forms.RadioButton()
+        Me.txtLaunchVar = New System.Windows.Forms.TextBox()
+        Me.optLaunchFile = New System.Windows.Forms.RadioButton()
+        Me.txtLaunchFile = New System.Windows.Forms.TextBox()
+        Me.btnLaunchBrowse = New System.Windows.Forms.Button()
+        Me.selectProgram = New System.Windows.Forms.OpenFileDialog()
         Me.grpFlag.SuspendLayout()
-        Me.grpLaunch.SuspendLayout()
+        Me.grpLaunchMethod.SuspendLayout()
         Me.grpLocation.SuspendLayout()
+        Me.grpLaunch.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSave
@@ -133,7 +141,8 @@ Partial Class CMDLauncher
         '
         'btnFlags
         '
-        Me.btnFlags.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnFlags.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnFlags.Location = New System.Drawing.Point(12, 60)
         Me.btnFlags.Name = "btnFlags"
         Me.btnFlags.Size = New System.Drawing.Size(162, 23)
@@ -144,7 +153,8 @@ Partial Class CMDLauncher
         '
         'btnResetIgnore
         '
-        Me.btnResetIgnore.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnResetIgnore.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnResetIgnore.Enabled = False
         Me.btnResetIgnore.Location = New System.Drawing.Point(12, 89)
         Me.btnResetIgnore.Name = "btnResetIgnore"
@@ -154,20 +164,20 @@ Partial Class CMDLauncher
         Me.btnResetIgnore.UseVisualStyleBackColor = True
         Me.btnResetIgnore.Visible = False
         '
-        'grpLaunch
+        'grpLaunchMethod
         '
-        Me.grpLaunch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.grpLaunchMethod.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpLaunch.Controls.Add(Me.lnkLaunchHelp)
-        Me.grpLaunch.Controls.Add(Me.optLaunchShell)
-        Me.grpLaunch.Controls.Add(Me.optLaunchProcess_Start)
-        Me.grpLaunch.Location = New System.Drawing.Point(12, 118)
-        Me.grpLaunch.Name = "grpLaunch"
-        Me.grpLaunch.Size = New System.Drawing.Size(162, 65)
-        Me.grpLaunch.TabIndex = 7
-        Me.grpLaunch.TabStop = False
-        Me.grpLaunch.Text = "Launch Method"
-        Me.grpLaunch.Visible = False
+        Me.grpLaunchMethod.Controls.Add(Me.lnkLaunchHelp)
+        Me.grpLaunchMethod.Controls.Add(Me.optLaunchShell)
+        Me.grpLaunchMethod.Controls.Add(Me.optLaunchProcessDotStart)
+        Me.grpLaunchMethod.Location = New System.Drawing.Point(12, 118)
+        Me.grpLaunchMethod.Name = "grpLaunchMethod"
+        Me.grpLaunchMethod.Size = New System.Drawing.Size(162, 65)
+        Me.grpLaunchMethod.TabIndex = 7
+        Me.grpLaunchMethod.TabStop = False
+        Me.grpLaunchMethod.Text = "Launch Method"
+        Me.grpLaunchMethod.Visible = False
         '
         'lnkLaunchHelp
         '
@@ -190,16 +200,16 @@ Partial Class CMDLauncher
         Me.optLaunchShell.Text = "Shell()"
         Me.optLaunchShell.UseVisualStyleBackColor = True
         '
-        'optLaunchProcess_Start
+        'optLaunchProcessDotStart
         '
-        Me.optLaunchProcess_Start.AutoSize = True
-        Me.optLaunchProcess_Start.Location = New System.Drawing.Point(6, 19)
-        Me.optLaunchProcess_Start.Name = "optLaunchProcess_Start"
-        Me.optLaunchProcess_Start.Size = New System.Drawing.Size(94, 17)
-        Me.optLaunchProcess_Start.TabIndex = 0
-        Me.optLaunchProcess_Start.TabStop = True
-        Me.optLaunchProcess_Start.Text = "Process.Start()"
-        Me.optLaunchProcess_Start.UseVisualStyleBackColor = True
+        Me.optLaunchProcessDotStart.AutoSize = True
+        Me.optLaunchProcessDotStart.Location = New System.Drawing.Point(6, 19)
+        Me.optLaunchProcessDotStart.Name = "optLaunchProcessDotStart"
+        Me.optLaunchProcessDotStart.Size = New System.Drawing.Size(94, 17)
+        Me.optLaunchProcessDotStart.TabIndex = 0
+        Me.optLaunchProcessDotStart.TabStop = True
+        Me.optLaunchProcessDotStart.Text = "Process.Start()"
+        Me.optLaunchProcessDotStart.UseVisualStyleBackColor = True
         '
         'grpLocation
         '
@@ -227,6 +237,81 @@ Partial Class CMDLauncher
         Me.cbxLocation.Size = New System.Drawing.Size(150, 21)
         Me.cbxLocation.TabIndex = 0
         '
+        'grpLaunch
+        '
+        Me.grpLaunch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpLaunch.Controls.Add(Me.btnLaunchBrowse)
+        Me.grpLaunch.Controls.Add(Me.txtLaunchFile)
+        Me.grpLaunch.Controls.Add(Me.optLaunchFile)
+        Me.grpLaunch.Controls.Add(Me.txtLaunchVar)
+        Me.grpLaunch.Controls.Add(Me.optLaunchVar)
+        Me.grpLaunch.Location = New System.Drawing.Point(12, 241)
+        Me.grpLaunch.Name = "grpLaunch"
+        Me.grpLaunch.Size = New System.Drawing.Size(162, 68)
+        Me.grpLaunch.TabIndex = 9
+        Me.grpLaunch.TabStop = False
+        Me.grpLaunch.Text = "What to use to launch"
+        Me.grpLaunch.Visible = False
+        '
+        'optLaunchVar
+        '
+        Me.optLaunchVar.AutoSize = True
+        Me.optLaunchVar.Location = New System.Drawing.Point(6, 19)
+        Me.optLaunchVar.Name = "optLaunchVar"
+        Me.optLaunchVar.Size = New System.Drawing.Size(66, 17)
+        Me.optLaunchVar.TabIndex = 0
+        Me.optLaunchVar.TabStop = True
+        Me.optLaunchVar.Text = "Variable:"
+        Me.optLaunchVar.UseVisualStyleBackColor = True
+        '
+        'txtLaunchVar
+        '
+        Me.txtLaunchVar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLaunchVar.Location = New System.Drawing.Point(68, 18)
+        Me.txtLaunchVar.Name = "txtLaunchVar"
+        Me.txtLaunchVar.Size = New System.Drawing.Size(88, 20)
+        Me.txtLaunchVar.TabIndex = 1
+        '
+        'optLaunchFile
+        '
+        Me.optLaunchFile.AutoSize = True
+        Me.optLaunchFile.Location = New System.Drawing.Point(6, 42)
+        Me.optLaunchFile.Name = "optLaunchFile"
+        Me.optLaunchFile.Size = New System.Drawing.Size(44, 17)
+        Me.optLaunchFile.TabIndex = 2
+        Me.optLaunchFile.TabStop = True
+        Me.optLaunchFile.Text = "File:"
+        Me.optLaunchFile.UseVisualStyleBackColor = True
+        '
+        'txtLaunchFile
+        '
+        Me.txtLaunchFile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLaunchFile.Location = New System.Drawing.Point(48, 41)
+        Me.txtLaunchFile.Name = "txtLaunchFile"
+        Me.txtLaunchFile.Size = New System.Drawing.Size(58, 20)
+        Me.txtLaunchFile.TabIndex = 3
+        '
+        'btnLaunchBrowse
+        '
+        Me.btnLaunchBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnLaunchBrowse.Location = New System.Drawing.Point(106, 39)
+        Me.btnLaunchBrowse.Name = "btnLaunchBrowse"
+        Me.btnLaunchBrowse.Size = New System.Drawing.Size(50, 23)
+        Me.btnLaunchBrowse.TabIndex = 4
+        Me.btnLaunchBrowse.Text = "Browse"
+        Me.btnLaunchBrowse.UseVisualStyleBackColor = True
+        '
+        'selectProgram
+        '
+        Me.selectProgram.FileName = "cmd.exe"
+        Me.selectProgram.Filter = "Executable files (*.exe, *.com)|*.exe; *.com|All files|*.*"
+        Me.selectProgram.InitialDirectory = "C:\Windows\System32"
+        Me.selectProgram.ReadOnlyChecked = True
+        Me.selectProgram.Title = "Select an executable:"
+        '
         'CMDLauncher
         '
         Me.AcceptButton = Me.btnSave
@@ -234,8 +319,9 @@ Partial Class CMDLauncher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(186, 128)
-        Me.Controls.Add(Me.grpLocation)
         Me.Controls.Add(Me.grpLaunch)
+        Me.Controls.Add(Me.grpLocation)
+        Me.Controls.Add(Me.grpLaunchMethod)
         Me.Controls.Add(Me.btnResetIgnore)
         Me.Controls.Add(Me.btnAdvanced)
         Me.Controls.Add(Me.btnOpenWith)
@@ -249,9 +335,11 @@ Partial Class CMDLauncher
         Me.Text = "CMDLauncher Settings"
         Me.grpFlag.ResumeLayout(False)
         Me.grpFlag.PerformLayout()
+        Me.grpLaunchMethod.ResumeLayout(False)
+        Me.grpLaunchMethod.PerformLayout()
+        Me.grpLocation.ResumeLayout(False)
         Me.grpLaunch.ResumeLayout(False)
         Me.grpLaunch.PerformLayout()
-        Me.grpLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -265,11 +353,18 @@ Partial Class CMDLauncher
     Friend WithEvents btnAdvanced As System.Windows.Forms.Button
     Friend WithEvents btnFlags As System.Windows.Forms.Button
     Friend WithEvents btnResetIgnore As System.Windows.Forms.Button
-    Friend WithEvents grpLaunch As System.Windows.Forms.GroupBox
+    Friend WithEvents grpLaunchMethod As System.Windows.Forms.GroupBox
     Friend WithEvents lnkLaunchHelp As System.Windows.Forms.LinkLabel
     Friend WithEvents optLaunchShell As System.Windows.Forms.RadioButton
-    Friend WithEvents optLaunchProcess_Start As System.Windows.Forms.RadioButton
+    Friend WithEvents optLaunchProcessDotStart As System.Windows.Forms.RadioButton
     Friend WithEvents grpLocation As System.Windows.Forms.GroupBox
     Friend WithEvents cbxLocation As System.Windows.Forms.ComboBox
+    Friend WithEvents grpLaunch As System.Windows.Forms.GroupBox
+    Friend WithEvents btnLaunchBrowse As System.Windows.Forms.Button
+    Friend WithEvents txtLaunchFile As System.Windows.Forms.TextBox
+    Friend WithEvents optLaunchFile As System.Windows.Forms.RadioButton
+    Friend WithEvents txtLaunchVar As System.Windows.Forms.TextBox
+    Friend WithEvents optLaunchVar As System.Windows.Forms.RadioButton
+    Friend WithEvents selectProgram As System.Windows.Forms.OpenFileDialog
 
 End Class
