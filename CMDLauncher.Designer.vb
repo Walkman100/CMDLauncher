@@ -26,19 +26,24 @@ Partial Class CMDLauncher
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.grpFlag = New System.Windows.Forms.GroupBox()
-        Me.lnkFlag = New System.Windows.Forms.LinkLabel()
+        Me.lnkFlagHelp = New System.Windows.Forms.LinkLabel()
         Me.optC = New System.Windows.Forms.RadioButton()
         Me.optK = New System.Windows.Forms.RadioButton()
         Me.btnOpenWith = New System.Windows.Forms.Button()
         Me.btnAdvanced = New System.Windows.Forms.Button()
         Me.btnFlags = New System.Windows.Forms.Button()
         Me.btnResetIgnore = New System.Windows.Forms.Button()
+        Me.grpLaunch = New System.Windows.Forms.GroupBox()
+        Me.optLaunchProcess_Start = New System.Windows.Forms.RadioButton()
+        Me.optLaunchShell = New System.Windows.Forms.RadioButton()
+        Me.lnkLaunchHelp = New System.Windows.Forms.LinkLabel()
         Me.grpFlag.SuspendLayout()
+        Me.grpLaunch.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSave
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnSave.Location = New System.Drawing.Point(12, 93)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(78, 23)
@@ -48,7 +53,7 @@ Partial Class CMDLauncher
         '
         'btnCancel
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnCancel.Location = New System.Drawing.Point(96, 93)
         Me.btnCancel.Name = "btnCancel"
@@ -61,7 +66,7 @@ Partial Class CMDLauncher
         '
         Me.grpFlag.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpFlag.Controls.Add(Me.lnkFlag)
+        Me.grpFlag.Controls.Add(Me.lnkFlagHelp)
         Me.grpFlag.Controls.Add(Me.optC)
         Me.grpFlag.Controls.Add(Me.optK)
         Me.grpFlag.Location = New System.Drawing.Point(12, 12)
@@ -71,15 +76,15 @@ Partial Class CMDLauncher
         Me.grpFlag.TabStop = False
         Me.grpFlag.Text = "CMD Flag"
         '
-        'lnkFlag
+        'lnkFlagHelp
         '
-        Me.lnkFlag.AutoSize = True
-        Me.lnkFlag.Location = New System.Drawing.Point(90, 21)
-        Me.lnkFlag.Name = "lnkFlag"
-        Me.lnkFlag.Size = New System.Drawing.Size(29, 13)
-        Me.lnkFlag.TabIndex = 2
-        Me.lnkFlag.TabStop = True
-        Me.lnkFlag.Text = "Help"
+        Me.lnkFlagHelp.AutoSize = True
+        Me.lnkFlagHelp.Location = New System.Drawing.Point(90, 21)
+        Me.lnkFlagHelp.Name = "lnkFlagHelp"
+        Me.lnkFlagHelp.Size = New System.Drawing.Size(29, 13)
+        Me.lnkFlagHelp.TabIndex = 2
+        Me.lnkFlagHelp.TabStop = True
+        Me.lnkFlagHelp.Text = "Help"
         '
         'optC
         '
@@ -105,7 +110,7 @@ Partial Class CMDLauncher
         '
         'btnOpenWith
         '
-        Me.btnOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenWith.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnOpenWith.Location = New System.Drawing.Point(80, 64)
         Me.btnOpenWith.Name = "btnOpenWith"
         Me.btnOpenWith.Size = New System.Drawing.Size(94, 23)
@@ -115,7 +120,7 @@ Partial Class CMDLauncher
         '
         'btnAdvanced
         '
-        Me.btnAdvanced.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdvanced.Anchor = System.Windows.Forms.AnchorStyles.Bottom
         Me.btnAdvanced.Location = New System.Drawing.Point(12, 64)
         Me.btnAdvanced.Name = "btnAdvanced"
         Me.btnAdvanced.Size = New System.Drawing.Size(64, 23)
@@ -146,6 +151,53 @@ Partial Class CMDLauncher
         Me.btnResetIgnore.UseVisualStyleBackColor = True
         Me.btnResetIgnore.Visible = False
         '
+        'grpLaunch
+        '
+        Me.grpLaunch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpLaunch.Controls.Add(Me.lnkLaunchHelp)
+        Me.grpLaunch.Controls.Add(Me.optLaunchShell)
+        Me.grpLaunch.Controls.Add(Me.optLaunchProcess_Start)
+        Me.grpLaunch.Location = New System.Drawing.Point(12, 118)
+        Me.grpLaunch.Name = "grpLaunch"
+        Me.grpLaunch.Size = New System.Drawing.Size(162, 65)
+        Me.grpLaunch.TabIndex = 7
+        Me.grpLaunch.TabStop = False
+        Me.grpLaunch.Text = "Launch Method"
+        Me.grpLaunch.Visible = False
+        '
+        'optLaunchProcess_Start
+        '
+        Me.optLaunchProcess_Start.AutoSize = True
+        Me.optLaunchProcess_Start.Location = New System.Drawing.Point(6, 19)
+        Me.optLaunchProcess_Start.Name = "optLaunchProcess_Start"
+        Me.optLaunchProcess_Start.Size = New System.Drawing.Size(94, 17)
+        Me.optLaunchProcess_Start.TabIndex = 0
+        Me.optLaunchProcess_Start.TabStop = True
+        Me.optLaunchProcess_Start.Text = "Process.Start()"
+        Me.optLaunchProcess_Start.UseVisualStyleBackColor = True
+        '
+        'optLaunchShell
+        '
+        Me.optLaunchShell.AutoSize = True
+        Me.optLaunchShell.Location = New System.Drawing.Point(6, 42)
+        Me.optLaunchShell.Name = "optLaunchShell"
+        Me.optLaunchShell.Size = New System.Drawing.Size(54, 17)
+        Me.optLaunchShell.TabIndex = 1
+        Me.optLaunchShell.TabStop = True
+        Me.optLaunchShell.Text = "Shell()"
+        Me.optLaunchShell.UseVisualStyleBackColor = True
+        '
+        'lnkLaunchHelp
+        '
+        Me.lnkLaunchHelp.AutoSize = True
+        Me.lnkLaunchHelp.Location = New System.Drawing.Point(66, 44)
+        Me.lnkLaunchHelp.Name = "lnkLaunchHelp"
+        Me.lnkLaunchHelp.Size = New System.Drawing.Size(29, 13)
+        Me.lnkLaunchHelp.TabIndex = 2
+        Me.lnkLaunchHelp.TabStop = True
+        Me.lnkLaunchHelp.Text = "Help"
+        '
         'CMDLauncher
         '
         Me.AcceptButton = Me.btnSave
@@ -153,6 +205,7 @@ Partial Class CMDLauncher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(186, 128)
+        Me.Controls.Add(Me.grpLaunch)
         Me.Controls.Add(Me.btnResetIgnore)
         Me.Controls.Add(Me.btnAdvanced)
         Me.Controls.Add(Me.btnOpenWith)
@@ -166,18 +219,24 @@ Partial Class CMDLauncher
         Me.Text = "CMDLauncher Settings"
         Me.grpFlag.ResumeLayout(False)
         Me.grpFlag.PerformLayout()
+        Me.grpLaunch.ResumeLayout(False)
+        Me.grpLaunch.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents grpFlag As System.Windows.Forms.GroupBox
-    Friend WithEvents lnkFlag As System.Windows.Forms.LinkLabel
+    Friend WithEvents lnkFlagHelp As System.Windows.Forms.LinkLabel
     Friend WithEvents optC As System.Windows.Forms.RadioButton
     Friend WithEvents optK As System.Windows.Forms.RadioButton
     Friend WithEvents btnOpenWith As System.Windows.Forms.Button
     Friend WithEvents btnAdvanced As System.Windows.Forms.Button
     Friend WithEvents btnFlags As System.Windows.Forms.Button
     Friend WithEvents btnResetIgnore As System.Windows.Forms.Button
+    Friend WithEvents grpLaunch As System.Windows.Forms.GroupBox
+    Friend WithEvents lnkLaunchHelp As System.Windows.Forms.LinkLabel
+    Friend WithEvents optLaunchShell As System.Windows.Forms.RadioButton
+    Friend WithEvents optLaunchProcess_Start As System.Windows.Forms.RadioButton
 
 End Class
