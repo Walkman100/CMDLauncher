@@ -34,11 +34,14 @@ Partial Class CMDLauncher
         Me.btnFlags = New System.Windows.Forms.Button()
         Me.btnResetIgnore = New System.Windows.Forms.Button()
         Me.grpLaunch = New System.Windows.Forms.GroupBox()
-        Me.optLaunchProcess_Start = New System.Windows.Forms.RadioButton()
-        Me.optLaunchShell = New System.Windows.Forms.RadioButton()
         Me.lnkLaunchHelp = New System.Windows.Forms.LinkLabel()
+        Me.optLaunchShell = New System.Windows.Forms.RadioButton()
+        Me.optLaunchProcess_Start = New System.Windows.Forms.RadioButton()
+        Me.grpLocation = New System.Windows.Forms.GroupBox()
+        Me.cbxLocation = New System.Windows.Forms.ComboBox()
         Me.grpFlag.SuspendLayout()
         Me.grpLaunch.SuspendLayout()
+        Me.grpLocation.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSave
@@ -166,16 +169,15 @@ Partial Class CMDLauncher
         Me.grpLaunch.Text = "Launch Method"
         Me.grpLaunch.Visible = False
         '
-        'optLaunchProcess_Start
+        'lnkLaunchHelp
         '
-        Me.optLaunchProcess_Start.AutoSize = True
-        Me.optLaunchProcess_Start.Location = New System.Drawing.Point(6, 19)
-        Me.optLaunchProcess_Start.Name = "optLaunchProcess_Start"
-        Me.optLaunchProcess_Start.Size = New System.Drawing.Size(94, 17)
-        Me.optLaunchProcess_Start.TabIndex = 0
-        Me.optLaunchProcess_Start.TabStop = True
-        Me.optLaunchProcess_Start.Text = "Process.Start()"
-        Me.optLaunchProcess_Start.UseVisualStyleBackColor = True
+        Me.lnkLaunchHelp.AutoSize = True
+        Me.lnkLaunchHelp.Location = New System.Drawing.Point(66, 44)
+        Me.lnkLaunchHelp.Name = "lnkLaunchHelp"
+        Me.lnkLaunchHelp.Size = New System.Drawing.Size(29, 13)
+        Me.lnkLaunchHelp.TabIndex = 2
+        Me.lnkLaunchHelp.TabStop = True
+        Me.lnkLaunchHelp.Text = "Help"
         '
         'optLaunchShell
         '
@@ -188,15 +190,42 @@ Partial Class CMDLauncher
         Me.optLaunchShell.Text = "Shell()"
         Me.optLaunchShell.UseVisualStyleBackColor = True
         '
-        'lnkLaunchHelp
+        'optLaunchProcess_Start
         '
-        Me.lnkLaunchHelp.AutoSize = True
-        Me.lnkLaunchHelp.Location = New System.Drawing.Point(66, 44)
-        Me.lnkLaunchHelp.Name = "lnkLaunchHelp"
-        Me.lnkLaunchHelp.Size = New System.Drawing.Size(29, 13)
-        Me.lnkLaunchHelp.TabIndex = 2
-        Me.lnkLaunchHelp.TabStop = True
-        Me.lnkLaunchHelp.Text = "Help"
+        Me.optLaunchProcess_Start.AutoSize = True
+        Me.optLaunchProcess_Start.Location = New System.Drawing.Point(6, 19)
+        Me.optLaunchProcess_Start.Name = "optLaunchProcess_Start"
+        Me.optLaunchProcess_Start.Size = New System.Drawing.Size(94, 17)
+        Me.optLaunchProcess_Start.TabIndex = 0
+        Me.optLaunchProcess_Start.TabStop = True
+        Me.optLaunchProcess_Start.Text = "Process.Start()"
+        Me.optLaunchProcess_Start.UseVisualStyleBackColor = True
+        '
+        'grpLocation
+        '
+        Me.grpLocation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpLocation.Controls.Add(Me.cbxLocation)
+        Me.grpLocation.Location = New System.Drawing.Point(12, 189)
+        Me.grpLocation.Name = "grpLocation"
+        Me.grpLocation.Size = New System.Drawing.Size(162, 46)
+        Me.grpLocation.TabIndex = 8
+        Me.grpLocation.TabStop = False
+        Me.grpLocation.Text = "Opened window Location"
+        Me.grpLocation.Visible = False
+        '
+        'cbxLocation
+        '
+        Me.cbxLocation.AccessibleName = "/c"
+        Me.cbxLocation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cbxLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbxLocation.FormattingEnabled = True
+        Me.cbxLocation.Items.AddRange(New Object() {"Normal (focused)", "Normal (not focused)", "Maximised (focused)", "Minimised (focused)", "Minimised (not focused)", "Hidden (focused)"})
+        Me.cbxLocation.Location = New System.Drawing.Point(6, 19)
+        Me.cbxLocation.Name = "cbxLocation"
+        Me.cbxLocation.Size = New System.Drawing.Size(150, 21)
+        Me.cbxLocation.TabIndex = 0
         '
         'CMDLauncher
         '
@@ -205,6 +234,7 @@ Partial Class CMDLauncher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(186, 128)
+        Me.Controls.Add(Me.grpLocation)
         Me.Controls.Add(Me.grpLaunch)
         Me.Controls.Add(Me.btnResetIgnore)
         Me.Controls.Add(Me.btnAdvanced)
@@ -221,6 +251,7 @@ Partial Class CMDLauncher
         Me.grpFlag.PerformLayout()
         Me.grpLaunch.ResumeLayout(False)
         Me.grpLaunch.PerformLayout()
+        Me.grpLocation.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -238,5 +269,7 @@ Partial Class CMDLauncher
     Friend WithEvents lnkLaunchHelp As System.Windows.Forms.LinkLabel
     Friend WithEvents optLaunchShell As System.Windows.Forms.RadioButton
     Friend WithEvents optLaunchProcess_Start As System.Windows.Forms.RadioButton
+    Friend WithEvents grpLocation As System.Windows.Forms.GroupBox
+    Friend WithEvents cbxLocation As System.Windows.Forms.ComboBox
 
 End Class

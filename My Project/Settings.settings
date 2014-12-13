@@ -11,5 +11,8 @@
     <Setting Name="LaunchMethod" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="WindowLocation" Type="Microsoft.VisualBasic.AppWinStyle" Scope="User">
+      <Value Profile="(Default)">NormalFocus</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

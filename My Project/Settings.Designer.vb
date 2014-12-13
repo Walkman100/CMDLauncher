@@ -89,6 +89,18 @@ Namespace My
                 Me("LaunchMethod") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("NormalFocus")>  _
+        Public Property WindowLocation() As Global.Microsoft.VisualBasic.AppWinStyle
+            Get
+                Return CType(Me("WindowLocation"),Global.Microsoft.VisualBasic.AppWinStyle)
+            End Get
+            Set
+                Me("WindowLocation") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

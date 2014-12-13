@@ -13,7 +13,7 @@
                 If My.Settings.LaunchMethod = 0 Then ' optLaunchProcess_Start.Checked = True
                     Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
                 ElseIf My.Settings.LaunchMethod = 1 Then ' optLaunchShell.Checked = True
-                    Shell(Environment.GetEnvironmentVariable("comspec") & " " & My.Settings.Flag & " """ & s & "")
+                    Shell(Environment.GetEnvironmentVariable("comspec") & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
                 End If
                 Application.Exit()
             End If
@@ -73,6 +73,21 @@
         ElseIf My.Settings.LaunchMethod = 1 Then
             optLaunchShell.Checked = True
         End If
+        optLaunchShell_CheckedChanged()
+        Select Case My.Settings.WindowLocation
+            Case AppWinStyle.NormalFocus
+                cbxLocation.SelectedIndex = 0
+            Case AppWinStyle.NormalNoFocus
+                cbxLocation.SelectedIndex = 1
+            Case AppWinStyle.MaximizedFocus
+                cbxLocation.SelectedIndex = 2
+            Case AppWinStyle.MinimizedFocus
+                cbxLocation.SelectedIndex = 3
+            Case AppWinStyle.MinimizedNoFocus
+                cbxLocation.SelectedIndex = 4
+            Case AppWinStyle.Hide
+                cbxLocation.SelectedIndex = 5
+        End Select
     End Sub
 
     Sub SetSettings()
@@ -86,6 +101,20 @@
         ElseIf optLaunchShell.Checked = True Then
             My.Settings.LaunchMethod = 1
         End If
+        Select Case cbxLocation.SelectedIndex
+            Case 0
+                My.Settings.WindowLocation = AppWinStyle.NormalFocus
+            Case 1
+                My.Settings.WindowLocation = AppWinStyle.NormalNoFocus
+            Case 2
+                My.Settings.WindowLocation = AppWinStyle.MaximizedFocus
+            Case 3
+                My.Settings.WindowLocation = AppWinStyle.MinimizedFocus
+            Case 4
+                My.Settings.WindowLocation = AppWinStyle.MinimizedNoFocus
+            Case 5
+                My.Settings.WindowLocation = AppWinStyle.Hide
+        End Select
     End Sub
 
     Private Sub btnOpenWith_Click(sender As Object, e As EventArgs) Handles btnOpenWith.Click
@@ -93,19 +122,21 @@
     End Sub
 
     Private Sub btnAdvanced_Click(sender As Object, e As EventArgs) Handles btnAdvanced.Click
-        If Me.Height = 300 Then ' Show Basic
+        If Me.Height = 343 Then ' Show Basic
             Me.Height = 166
             btnAdvanced.Text = "Advanced"
             btnFlags.Hide()
             btnResetIgnore.Hide()
             grpLaunch.Hide()
+            grpLocation.Hide()
         Else ' Show Advanced
-            Me.Height = 300
+            Me.Height = 343
             btnAdvanced.Text = "Basic"
             btnFlags.Show()
             btnResetIgnore.Show()
             If My.Settings.InstCheck = False Then btnResetIgnore.Enabled = True
             grpLaunch.Show()
+            grpLocation.Show()
         End If
     End Sub
 
@@ -126,5 +157,10 @@
     Private Sub lnkLaunchHelp_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkLaunchHelp.LinkClicked
         MsgBox("Shell() allows CMDLauncher to easily specify window info for the CMD window" & vbNewLine & vbNewLine & _
                "Process.Start() is more secure and launches the process seperately", MsgBoxStyle.Information, "Launch Method Info")
+    End Sub
+
+    Private Sub optLaunchShell_CheckedChanged() Handles optLaunchShell.CheckedChanged
+        cbxLocation.Enabled = optLaunchShell.Checked
+        If optLaunchProcess_Start.Checked Then cbxLocation.SelectedIndex = 0
     End Sub
 End Class
