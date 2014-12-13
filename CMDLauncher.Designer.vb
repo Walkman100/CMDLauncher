@@ -329,7 +329,9 @@ Partial Class CMDLauncher
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnFlags)
         Me.Controls.Add(Me.grpFlag)
+        Me.HelpButton = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "CMDLauncher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CMDLauncher Settings"

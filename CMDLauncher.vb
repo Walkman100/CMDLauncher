@@ -11,9 +11,17 @@
         For Each s As String In My.Application.CommandLineArgs
             If s <> "noCheck" Then
                 If My.Settings.LaunchMethod = 0 Then ' optLaunchProcess_Start.Checked = True
-                    Process.Start(Environment.GetEnvironmentVariable("comspec"), My.Settings.Flag & " """ & s & "")
+                    If My.Settings.LaunchOption = 0 Then
+                        Process.Start(Environment.GetEnvironmentVariable(My.Settings.LaunchData), My.Settings.Flag & " """ & s & "")
+                    ElseIf My.Settings.LaunchMethod = 1 Then
+                        Process.Start(My.Settings.LaunchData, My.Settings.Flag & " """ & s & "")
+                    End If
                 ElseIf My.Settings.LaunchMethod = 1 Then ' optLaunchShell.Checked = True
-                    Shell(Environment.GetEnvironmentVariable("comspec") & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
+                    If My.Settings.LaunchOption = 0 Then
+                        Shell(Environment.GetEnvironmentVariable(My.Settings.LaunchData) & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
+                    ElseIf My.Settings.LaunchMethod = 1 Then
+                        Shell(My.Settings.LaunchData & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
+                    End If
                 End If
                 Application.Exit()
             End If
