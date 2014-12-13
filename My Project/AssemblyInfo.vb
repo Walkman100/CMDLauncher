@@ -8,7 +8,7 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("CMDLauncher")> 
+<Assembly: AssemblyTitle("CMD Launcher")> 
 <Assembly: AssemblyDescription("Launches bat files in CMD (Open With)")> 
 <Assembly: AssemblyCompany("DeavmiOSS")> 
 <Assembly: AssemblyProduct("CMDLauncher")> 
