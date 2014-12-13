@@ -11,12 +11,7 @@
         Next
 
         ' If no arguments given
-        If My.Settings.Flag = "/c" Then
-            optC.Checked = True
-        End If
-        If My.Settings.Flag = "/k" Then
-            optK.Checked = True
-        End If
+        LoadSettings()
     End Sub
 
     Sub CheckInstDir()
@@ -51,17 +46,9 @@
         End If
     End Sub
 
-    Private Sub lnkFlag_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkFlag.LinkClicked
-        MsgBox("/k: Leave CMD window open after running script" & vbNewLine & "/c: Close CMD after running script", MsgBoxStyle.Information, "CMD Flag Info")
-    End Sub
-
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        If optC.Checked = True Then
-            My.Settings.Flag = "/c"
-        End If
-        If optK.Checked = True Then
-            My.Settings.Flag = "/k"
-        End If
+        SetSettings()
+        My.Settings.Save()
         Application.Exit()
     End Sub
 
@@ -69,7 +56,52 @@
         Application.Exit()
     End Sub
 
+    Sub LoadSettings()
+        If My.Settings.Flag = "/c" Then
+            optC.Checked = True
+        ElseIf My.Settings.Flag = "/k" Then
+            optK.Checked = True
+        End If
+    End Sub
+
+    Sub SetSettings()
+        If optC.Checked = True Then
+            My.Settings.Flag = "/c"
+        ElseIf optK.Checked = True Then
+            My.Settings.Flag = "/k"
+        End If
+    End Sub
+
+    Private Sub lnkFlag_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkFlag.LinkClicked
+        MsgBox("/k: Leave CMD window open after running script" & vbNewLine & "/c: Close CMD after running script", MsgBoxStyle.Information, "CMD Flag Info")
+    End Sub
+
     Private Sub btnOpenWith_Click(sender As Object, e As EventArgs) Handles btnOpenWith.Click
         Process.Start("rundll32", "C:\Windows\system32\shell32.dll,OpenAs_RunDLL .bat")
+    End Sub
+
+    Private Sub btnAdvanced_Click(sender As Object, e As EventArgs) Handles btnAdvanced.Click
+        If Me.Height = 300 Then ' Show Basic
+            Me.Height = 166
+            btnAdvanced.Text = "Advanced"
+            btnFlags.Hide()
+            btnResetIgnore.Hide()
+        Else ' Show Advanced
+            Me.Height = 300
+            btnAdvanced.Text = "Basic"
+            btnFlags.Show()
+            btnResetIgnore.Show()
+            If My.Settings.InstCheck = False Then btnResetIgnore.Enabled = True
+        End If
+    End Sub
+
+    Private Sub btnFlags_Click(sender As Object, e As EventArgs) Handles btnFlags.Click
+        My.Settings.Flag = InputBox("flags:", "", My.Settings.Flag)
+        LoadSettings()
+    End Sub
+
+    Private Sub btnResetIgnore_Click(sender As Object, e As EventArgs) Handles btnResetIgnore.Click
+        My.Settings.InstCheck = True
+        btnResetIgnore.Enabled = False
     End Sub
 End Class

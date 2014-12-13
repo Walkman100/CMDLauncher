@@ -30,15 +30,18 @@ Partial Class CMDLauncher
         Me.optC = New System.Windows.Forms.RadioButton()
         Me.optK = New System.Windows.Forms.RadioButton()
         Me.btnOpenWith = New System.Windows.Forms.Button()
+        Me.btnAdvanced = New System.Windows.Forms.Button()
+        Me.btnFlags = New System.Windows.Forms.Button()
+        Me.btnResetIgnore = New System.Windows.Forms.Button()
         Me.grpFlag.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnSave
         '
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.Location = New System.Drawing.Point(111, 61)
+        Me.btnSave.Location = New System.Drawing.Point(12, 93)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.Size = New System.Drawing.Size(78, 23)
         Me.btnSave.TabIndex = 0
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -47,9 +50,9 @@ Partial Class CMDLauncher
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(192, 61)
+        Me.btnCancel.Location = New System.Drawing.Point(96, 93)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.Size = New System.Drawing.Size(78, 23)
         Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
@@ -63,7 +66,7 @@ Partial Class CMDLauncher
         Me.grpFlag.Controls.Add(Me.optK)
         Me.grpFlag.Location = New System.Drawing.Point(12, 12)
         Me.grpFlag.Name = "grpFlag"
-        Me.grpFlag.Size = New System.Drawing.Size(255, 42)
+        Me.grpFlag.Size = New System.Drawing.Size(162, 42)
         Me.grpFlag.TabIndex = 2
         Me.grpFlag.TabStop = False
         Me.grpFlag.Text = "CMD Flag"
@@ -102,13 +105,46 @@ Partial Class CMDLauncher
         '
         'btnOpenWith
         '
-        Me.btnOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnOpenWith.Location = New System.Drawing.Point(12, 61)
+        Me.btnOpenWith.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOpenWith.Location = New System.Drawing.Point(80, 64)
         Me.btnOpenWith.Name = "btnOpenWith"
         Me.btnOpenWith.Size = New System.Drawing.Size(94, 23)
         Me.btnOpenWith.TabIndex = 3
         Me.btnOpenWith.Text = "Set Open With..."
         Me.btnOpenWith.UseVisualStyleBackColor = True
+        '
+        'btnAdvanced
+        '
+        Me.btnAdvanced.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdvanced.Location = New System.Drawing.Point(12, 64)
+        Me.btnAdvanced.Name = "btnAdvanced"
+        Me.btnAdvanced.Size = New System.Drawing.Size(64, 23)
+        Me.btnAdvanced.TabIndex = 4
+        Me.btnAdvanced.Text = "Advanced"
+        Me.btnAdvanced.UseVisualStyleBackColor = True
+        '
+        'btnFlags
+        '
+        Me.btnFlags.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnFlags.Location = New System.Drawing.Point(12, 60)
+        Me.btnFlags.Name = "btnFlags"
+        Me.btnFlags.Size = New System.Drawing.Size(162, 23)
+        Me.btnFlags.TabIndex = 5
+        Me.btnFlags.Text = "Custom flags..."
+        Me.btnFlags.UseVisualStyleBackColor = True
+        Me.btnFlags.Visible = False
+        '
+        'btnResetIgnore
+        '
+        Me.btnResetIgnore.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.btnResetIgnore.Enabled = False
+        Me.btnResetIgnore.Location = New System.Drawing.Point(12, 89)
+        Me.btnResetIgnore.Name = "btnResetIgnore"
+        Me.btnResetIgnore.Size = New System.Drawing.Size(162, 23)
+        Me.btnResetIgnore.TabIndex = 6
+        Me.btnResetIgnore.Text = "Reset Ignore install dir Mesage"
+        Me.btnResetIgnore.UseVisualStyleBackColor = True
+        Me.btnResetIgnore.Visible = False
         '
         'CMDLauncher
         '
@@ -116,11 +152,14 @@ Partial Class CMDLauncher
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(279, 96)
+        Me.ClientSize = New System.Drawing.Size(186, 128)
+        Me.Controls.Add(Me.btnResetIgnore)
+        Me.Controls.Add(Me.btnAdvanced)
         Me.Controls.Add(Me.btnOpenWith)
-        Me.Controls.Add(Me.grpFlag)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnFlags)
+        Me.Controls.Add(Me.grpFlag)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "CMDLauncher"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -137,5 +176,8 @@ Partial Class CMDLauncher
     Friend WithEvents optC As System.Windows.Forms.RadioButton
     Friend WithEvents optK As System.Windows.Forms.RadioButton
     Friend WithEvents btnOpenWith As System.Windows.Forms.Button
+    Friend WithEvents btnAdvanced As System.Windows.Forms.Button
+    Friend WithEvents btnFlags As System.Windows.Forms.Button
+    Friend WithEvents btnResetIgnore As System.Windows.Forms.Button
 
 End Class
