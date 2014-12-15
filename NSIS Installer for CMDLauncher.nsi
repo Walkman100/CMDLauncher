@@ -1,6 +1,6 @@
 ; CMDLauncher Installer NSIS Script
 ; get NSIS at http://tenet.dl.sourceforge.net/project/nsis/NSIS%202/2.46/nsis-2.46-setup.exe
-; As a program that all Power PC users should have, Notepad ++ is recommended to edit this file
+; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
 AddBrandingImage top 20
 Icon CmdScript.ico
@@ -29,10 +29,18 @@ UninstPage instfiles
 
 ; Sections
 
-Section "Executable"
+Section "CMDLauncher Executable & Uninstaller"
   SectionIn RO
   SetOutPath $INSTDIR
   File "bin\Release\CMDLauncher.exe"
+  WriteUninstaller "CMDLauncher-Uninst.exe"
+SectionEnd
+
+Section "CMDLauncher Start Menu Shortcuts"
+  CreateDirectory "$SMPROGRAMS\DeavmiOSS"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk" "$INSTDIR\CMDLauncher.exe" "" "$INSTDIR\CMDLauncher.exe" "" "" "" "CMDLauncher Options"
+  CreateShortCut "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk" "$INSTDIR\CMDLauncher-Uninst.exe" "" "" "" "" "" "Uninstall CMDLauncher"
+  ;Syntax for CreateShortCut: link.lnk target.file [parameters [icon.file [icon_index_number [start_options [keyboard_shortcut [description]]]]]]
 SectionEnd
 
 SubSection "Open in CMDLauncher"
@@ -62,4 +70,33 @@ Function .onInstSuccess
     MessageBox MB_YESNO "Install Succeeded! Open ReadMe?" IDNO NoReadme
       ExecShell "open" "https://github.com/Walkman100/CMDLauncher/blob/master/README.md#cmdlauncher-"
     NoReadme:
+FunctionEnd
+
+; Uninstaller
+
+Section "Uninstall"
+  Delete $INSTDIR\CMDLauncher-Uninst.exe   ; Remove Application Files
+  Delete $INSTDIR\CMDLauncher.exe
+  
+  Delete "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk"
+  RMDir $SMPROGRAMS\DeavmiOSS
+SectionEnd
+
+; Uninstaller Functions
+
+Function un.onInit
+    MessageBox MB_YESNO "This will uninstall CMDLauncher. Continue?" IDYES NoAbort
+      Abort ; causes uninstaller to quit.
+    NoAbort:
+    SetShellVarContext all
+    SetAutoClose true
+FunctionEnd
+
+Function un.onUninstFailed
+    MessageBox MB_OK "Uninstall Cancelled"
+FunctionEnd
+
+Function un.onUninstSuccess
+    MessageBox MB_OK "Uninstall Completed"
 FunctionEnd
