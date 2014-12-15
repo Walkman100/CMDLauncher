@@ -6,9 +6,7 @@ This program simply launches bat files in CMD, for if you accidentally set bat f
 ## Screenshots
 
 ![CMDLauncher Main Window](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/MainWindow.png "CMDLauncher Main Window")
-
 ![Not installed message](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/NotInstalledMessage.png "Not installed message")
-
 ![Set Default Program Dialog](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/SetDefaultProgram.png "Set Default Program Dialog")
 
 
