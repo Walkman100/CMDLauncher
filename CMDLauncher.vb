@@ -1,10 +1,9 @@
 ﻿Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadSettings()
         If My.Settings.InstCheck Then If My.Application.CommandLineArgs.Count > 0 Then If My.Application.CommandLineArgs.Item(0) <> "noCheck" Then CheckInstDir()
         If My.Settings.InstCheck Then If My.Application.CommandLineArgs.Count = 0 Then CheckInstDir()
         RunFiles()
-        ' If no arguments given:
-        LoadSettings()
     End Sub
 
     Sub RunFiles()
@@ -39,23 +38,14 @@
                 Application.Exit()
             End If
             Dim answer As Integer
-            answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
-                            & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
+            answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & _
+                            "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
+                            & vbNewLine & "Copy now? (Press cancel to never show this again)", _
+                            MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
             If answer = MsgBoxResult.Yes Then
-                If IO.File.Exists("sudo.cmd") Then
-                    Shell("sudo.cmd xcopy " & _
-                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
-                ElseIf IO.File.Exists(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd") Then
-                    Shell(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd xcopy " & _
-                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
-                Else
-                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
-                    Shell("sudo.cmd xcopy " & _
-                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
-                End If
+                Dim objShell As Object = CreateObject("Shell.Application")
+                objShell.ShellExecute("xcopy", Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " _
+                                      & Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "", "runas")
                 If MsgBox("Press OK when finished copying", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
                 If My.Application.CommandLineArgs.Count > 0 Then
                     Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck " & My.Application.CommandLineArgs.Item(0))
