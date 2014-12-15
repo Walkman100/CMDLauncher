@@ -22,7 +22,7 @@
                         Shell(My.Settings.LaunchData & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
                     End If
                 End If
-                Application.Exit()
+                QuitQuitQuit()
             End If
         Next
     End Sub
@@ -35,7 +35,7 @@
                 Else
                     Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck")
                 End If
-                Application.Exit()
+                QuitQuitQuit() ' Infinite loop, since it doesn't seem to exit properly
             End If
             Dim answer As Integer
             answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & _
@@ -52,7 +52,7 @@
                 Else
                     Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck")
                 End If
-                Application.Exit()
+                QuitQuitQuit()
             ElseIf answer = MsgBoxResult.Cancel Then
                 My.Settings.InstCheck = False
             End If
@@ -62,11 +62,19 @@
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         SetSettings()
         My.Settings.Save()
-        Application.Exit()
+        QuitQuitQuit()
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         End
+        QuitQuitQuit()
+    End Sub
+
+    Protected Sub QuitQuitQuit()
+        Do Until 0 <> 0
+            Application.Exit()
+            End
+        Loop
     End Sub
 
     Sub LoadSettings()
