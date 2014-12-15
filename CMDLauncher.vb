@@ -13,13 +13,13 @@
                 If My.Settings.LaunchMethod = 0 Then ' optLaunchProcess_Start.Checked = True
                     If My.Settings.LaunchOption = 0 Then
                         Process.Start(Environment.GetEnvironmentVariable(My.Settings.LaunchData), My.Settings.Flag & " """ & s & "")
-                    ElseIf My.Settings.LaunchMethod = 1 Then
+                    ElseIf My.Settings.LaunchOption = 1 Then
                         Process.Start(My.Settings.LaunchData, My.Settings.Flag & " """ & s & "")
                     End If
                 ElseIf My.Settings.LaunchMethod = 1 Then ' optLaunchShell.Checked = True
                     If My.Settings.LaunchOption = 0 Then
                         Shell(Environment.GetEnvironmentVariable(My.Settings.LaunchData) & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
-                    ElseIf My.Settings.LaunchMethod = 1 Then
+                    ElseIf My.Settings.LaunchOption = 1 Then
                         Shell(My.Settings.LaunchData & " " & My.Settings.Flag & " """ & s & "", My.Settings.WindowLocation)
                     End If
                 End If
@@ -34,25 +34,26 @@
             answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
                             & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
             If answer = MsgBoxResult.Yes Then
-                Try
+                If IO.File.Exists("sudo.cmd") Then
                     Shell("sudo.cmd xcopy " & _
                           Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                          Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
-                Catch
-                    Try
-                        '                                              Because there's no harm trying.
-                        Shell(Environment.GetEnvironmentVariable("windir") & "System32\sudo.cmd xcopy " & _
-                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                              Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
-                    Catch
-                        My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
-                        Shell("sudo.cmd xcopy " & _
-                              Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
-                              Environment.GetEnvironmentVariable("windir") & "\", vbMinimizedNoFocus, True)
-                    End Try
-                End Try
-                Threading.Thread.Sleep(500)
-                Shell(Environment.GetEnvironmentVariable("windir") & "\" & Process.GetCurrentProcess.ProcessName & ".exe noCheck", vbNormalFocus, False)
+                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
+                ElseIf IO.File.Exists(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd") Then
+                    Shell(Environment.GetEnvironmentVariable("windir") & "\System32\sudo.cmd xcopy " & _
+                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
+                Else
+                    My.Computer.Network.DownloadFile("https://raw.githubusercontent.com/Walkman100/Misc/master/Binaries/sudo.cmd", "sudo.cmd")
+                    Shell("sudo.cmd xcopy " & _
+                          Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " & _
+                          Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", vbMinimizedNoFocus, True)
+                End If
+                If MsgBox("Press OK when finished copying", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
+                If My.Application.CommandLineArgs.Count > 0 Then
+                    Shell(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe noCheck " & My.Application.CommandLineArgs.Item(0), vbNormalFocus, False)
+                Else
+                    Shell(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe noCheck", vbNormalFocus, False)
+                End If
                 Application.Exit()
             ElseIf answer = MsgBoxResult.Cancel Then
                 My.Settings.InstCheck = False
