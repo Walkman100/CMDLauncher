@@ -30,6 +30,14 @@
 
     Sub CheckInstDir()
         If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
+            If IO.File.Exists(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe") Then
+                If My.Application.CommandLineArgs.Count > 0 Then
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck " & My.Application.CommandLineArgs.Item(0))
+                Else
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck")
+                End If
+                Application.Exit()
+            End If
             Dim answer As Integer
             answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
                             & vbNewLine & "Copy now? (Press cancel to never show this again)", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
@@ -50,9 +58,9 @@
                 End If
                 If MsgBox("Press OK when finished copying", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
                 If My.Application.CommandLineArgs.Count > 0 Then
-                    Shell(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe noCheck " & My.Application.CommandLineArgs.Item(0), vbNormalFocus, False)
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck " & My.Application.CommandLineArgs.Item(0))
                 Else
-                    Shell(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe noCheck", vbNormalFocus, False)
+                    Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck")
                 End If
                 Application.Exit()
             ElseIf answer = MsgBoxResult.Cancel Then
