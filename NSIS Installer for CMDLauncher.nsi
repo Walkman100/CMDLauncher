@@ -75,8 +75,8 @@ FunctionEnd
 ; Uninstaller
 
 Section "Uninstall"
-  Delete $INSTDIR\CMDLauncher-Uninst.exe   ; Remove Application Files
-  Delete $INSTDIR\CMDLauncher.exe
+  Delete "$INSTDIR\CMDLauncher-Uninst.exe"   ; Remove Application Files
+  Delete "$INSTDIR\CMDLauncher.exe"
   
   Delete "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk"   ; Remove Start Menu Shortcuts & Folder
   Delete "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk"
