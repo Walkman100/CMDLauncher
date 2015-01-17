@@ -3,6 +3,10 @@
 
 This program simply launches bat files in CMD, for if you accidentally set bat files to open in a program.
 
+## Compile requirements
+
+See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
+
 ## Screenshots
 
 [![CMDLauncher Main Window](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/MainWindow.png "CMDLauncher Main Window")](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/MainWindow.png)
