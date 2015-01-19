@@ -45,11 +45,13 @@ SectionEnd
 
 SubSection "Open in CMDLauncher"
   Section "Add to Open With menu"
+    WriteRegStr HKCR "Applications\Applications\CMDLauncher.exe\DefaultIcon" "" "%SystemRoot%\\System32\\imageres.dll,-68"
     WriteRegStr HKCR "Applications\CMDLauncher.exe\shell\open\command" "" "$\"$INSTDIR\CMDLauncher.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\OpenWithList" "j" "CMDLauncher.exe"
   SectionEnd
   
   Section "Set as default program"
+    WriteRegStr HKCR "Applications\Applications\CMDLauncher.exe\DefaultIcon" "" "%SystemRoot%\\System32\\imageres.dll,-68"
     WriteRegStr HKCR "Applications\CMDLauncher.exe\shell\open\command" "" "$\"$INSTDIR\CMDLauncher.exe$\" $\"%1$\""
     WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\.bat\UserChoice" "Progid" "Applications\CMDLauncher.exe"
   SectionEnd
