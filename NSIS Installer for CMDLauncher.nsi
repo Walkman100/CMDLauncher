@@ -2,8 +2,7 @@
 ; get NSIS at http://nsis.sourceforge.net/Download
 ; As a program that all Power PC users should have, Notepad++ is recommended to edit this file
 
-AddBrandingImage top 20
-Icon CmdScript.ico
+Icon "My Project\ImageRes(#68).ico"
 Caption "CMDLauncher Installer"
 Name "CMDLauncher"
 AutoCloseWindow true
@@ -63,7 +62,6 @@ Function .onInit
   MessageBox MB_YESNO "This will install CMDLauncher. Do you wish to continue?" IDYES gogogo
     Abort
   gogogo:
-  SetBrandingImage "[/RESIZETOFIT] CmdScript.ico"
   SetShellVarContext all
   SetAutoClose true
 FunctionEnd

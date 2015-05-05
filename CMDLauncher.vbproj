@@ -35,7 +35,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>CmdScript.ico</ApplicationIcon>
+    <ApplicationIcon>My Project\ImageRes%28#68%29.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
