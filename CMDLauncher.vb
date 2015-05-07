@@ -28,7 +28,7 @@
     End Sub
 
     Sub CheckInstDir()
-        If Environment.GetEnvironmentVariable("windir") <> Environment.CurrentDirectory Then
+        If Environment.GetEnvironmentVariable("windir") <> Application.StartupPath Then
             If IO.File.Exists(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe") Then
                 If My.Application.CommandLineArgs.Count > 0 Then
                     Process.Start(Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "noCheck " & My.Application.CommandLineArgs.Item(0))
@@ -43,7 +43,7 @@
                             & vbNewLine & "Copy now? (Press cancel to never show this again)", _
                             MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
             If answer = MsgBoxResult.Yes Then
-                CreateObject("Shell.Application").ShellExecute("xcopy", Environment.CurrentDirectory & "\" & Process.GetCurrentProcess.ProcessName & ".exe " _
+                CreateObject("Shell.Application").ShellExecute("xcopy", Application.StartupPath & "\" & Process.GetCurrentProcess.ProcessName & ".exe " _
                                                                & Environment.GetEnvironmentVariable("windir") & "\CMDLauncher.exe", "", "runas")
                 If MsgBox("Press OK when finished copying", MsgBoxStyle.OkCancel) = MsgBoxResult.Cancel Then Exit Sub
                 If My.Application.CommandLineArgs.Count > 0 Then
