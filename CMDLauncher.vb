@@ -37,8 +37,7 @@
                 End If
                 QuitQuitQuit() ' Infinite loop, since it doesn't seem to exit properly
             End If
-            Dim answer As Integer
-            answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & _
+            Dim answer = MsgBox("CMDLauncher is not installed to " & Environment.GetEnvironmentVariable("windir") & _
                             "! If it is moved, Windows will not know its location and won't be able to launch bat files." _
                             & vbNewLine & "Copy now? (Press cancel to never show this again)", _
                             MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Not Installed!")
@@ -150,7 +149,7 @@
     End Sub
 
     Private Sub btnOpenWith_Click(sender As Object, e As EventArgs) Handles btnOpenWith.Click
-        Process.Start("rundll32", "C:\Windows\system32\shell32.dll,OpenAs_RunDLL .bat")
+        Shell("rundll32 shell32.dll,OpenAs_RunDLL .bat", AppWinStyle.NormalFocus, True, 500)
     End Sub
 
     Private Sub btnAdvanced_Click(sender As Object, e As EventArgs) Handles btnAdvanced.Click
