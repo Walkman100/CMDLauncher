@@ -8,10 +8,10 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
 
 ## Screenshots
 [![CMDLauncher Main Window][Screenshot]][Screenshot]
-  [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/MainWindow.png
 [![Not installed message][NI Dialog]][NI Dialog]
-  [NI Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/NotInstalledMessage.png
 [![Set Default Program Dialog][SDP Dialog]][SDP Dialog]
+  [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/MainWindow.png
+  [NI Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/NotInstalledMessage.png
   [SDP Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/SetDefaultProgram.png
 
 
