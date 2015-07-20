@@ -7,9 +7,12 @@ This program simply launches bat files in CMD, for if you accidentally set bat f
 See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/master/CompileInstructions.md)
 
 ## Screenshots
-[![CMDLauncher Main Window](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/MainWindow.png "CMDLauncher Main Window")](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/MainWindow.png)
-[![Not installed message](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/NotInstalledMessage.png "Not installed message")](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/NotInstalledMessage.png)
-[![Set Default Program Dialog](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/SetDefaultProgram.png "Set Default Program Dialog")](http://walkman100.github.io/Walkman/Images/WindowsProjectsScreenshots/CMDLauncher/SetDefaultProgram.png)
+[![CMDLauncher Main Window][Screenshot]][Screenshot]
+  [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/MainWindow.png
+[![Not installed message][NI Dialog]][NI Dialog]
+  [NI Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/NotInstalledMessage.png
+[![Set Default Program Dialog][SDP Dialog]][SDP Dialog]
+  [SDP Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/SetDefaultProgram.png
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/Walkman100/cmdlauncher/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
