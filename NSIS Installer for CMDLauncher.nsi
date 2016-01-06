@@ -35,10 +35,16 @@ Section "CMDLauncher Executable & Uninstaller"
   WriteUninstaller "CMDLauncher-Uninst.exe"
 SectionEnd
 
+Section "Remove old DeavmiOSS shortcuts"
+  Delete "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk"
+  Delete "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk"
+  RMDir "$SMPROGRAMS\DeavmiOSS"
+SectionEnd
+
 Section "CMDLauncher Start Menu Shortcuts"
-  CreateDirectory "$SMPROGRAMS\DeavmiOSS"
-  CreateShortCut "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk" "$INSTDIR\CMDLauncher.exe" "" "$INSTDIR\CMDLauncher.exe" "" "" "" "CMDLauncher Options"
-  CreateShortCut "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk" "$INSTDIR\CMDLauncher-Uninst.exe" "" "" "" "" "" "Uninstall CMDLauncher"
+  CreateDirectory "$SMPROGRAMS\WalkmanOSS"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\CMDLauncher Options.lnk" "$INSTDIR\CMDLauncher.exe" "" "$INSTDIR\CMDLauncher.exe" "" "" "" "CMDLauncher Options"
+  CreateShortCut "$SMPROGRAMS\WalkmanOSS\Uninstall CMDLauncher.lnk" "$INSTDIR\CMDLauncher-Uninst.exe" "" "" "" "" "" "Uninstall CMDLauncher"
   ;Syntax for CreateShortCut: link.lnk target.file [parameters [icon.file [icon_index_number [start_options [keyboard_shortcut [description]]]]]]
 SectionEnd
 
@@ -78,9 +84,14 @@ Section "Uninstall"
   Delete "$INSTDIR\CMDLauncher-Uninst.exe"   ; Remove Application Files
   Delete "$INSTDIR\CMDLauncher.exe"
   
-  Delete "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\WalkmanOSS\CMDLauncher Options.lnk"   ; Remove Start Menu Shortcuts & Folder
+  Delete "$SMPROGRAMS\WalkmanOSS\Uninstall CMDLauncher.lnk"
+  RMDir "$SMPROGRAMS\WalkmanOSS"
+  
+  ; Remove old files in DeavmiOSS
+  Delete "$SMPROGRAMS\DeavmiOSS\CMDLauncher Options.lnk"
   Delete "$SMPROGRAMS\DeavmiOSS\Uninstall CMDLauncher.lnk"
-  RMDir $SMPROGRAMS\DeavmiOSS
+  RMDir "$SMPROGRAMS\DeavmiOSS"
 SectionEnd
 
 ; Uninstaller Functions
