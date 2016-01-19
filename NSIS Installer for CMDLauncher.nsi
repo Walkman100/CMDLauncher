@@ -5,6 +5,7 @@
 Icon "My Project\ImageRes(#68).ico"
 Caption "CMDLauncher Installer"
 Name "CMDLauncher"
+XPStyle on
 AutoCloseWindow true
 ShowInstDetails show
 
