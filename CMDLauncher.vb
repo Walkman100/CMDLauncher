@@ -1,4 +1,4 @@
-﻿Public Class CMDLauncher
+Public Class CMDLauncher
     Private Sub CMDLauncher_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadSettings()
         If My.Settings.InstCheck Then If My.Application.CommandLineArgs.Count > 0 Then If My.Application.CommandLineArgs.Item(0) <> "noCheck" Then CheckInstDir()
