@@ -14,3 +14,8 @@ See [CompileInstructions.md](https://github.com/Walkman100/WinCompile/blob/maste
   [Screenshot]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/MainWindow.png
   [NI Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/NotInstalledMessage.png
   [SDP Dialog]: http://walkman100.github.io/images/Screenshots/My_Projects/CMDLauncher/SetDefaultProgram.png
+
+## Download
+Get the latest version [here](https://github.com/Walkman100/CMDLauncher/releases), and the latest build from commit
+[here](https://ci.appveyor.com/project/Walkman100/CMDLauncher/build/artifacts)
+(note that these builds are built for the Debug config and so are not optimised)
