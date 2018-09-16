@@ -46,6 +46,7 @@ Partial Class CMDLauncher
         Me.txtLaunchFile = New System.Windows.Forms.TextBox()
         Me.btnLaunchBrowse = New System.Windows.Forms.Button()
         Me.selectProgram = New System.Windows.Forms.OpenFileDialog()
+        Me.lblVersion = New System.Windows.Forms.Label()
         Me.grpFlag.SuspendLayout()
         Me.grpLaunchMethod.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -312,6 +313,17 @@ Partial Class CMDLauncher
         Me.selectProgram.ReadOnlyChecked = True
         Me.selectProgram.Title = "Select an executable:"
         '
+        'lblVersion
+        '
+        Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 6!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.lblVersion.Location = New System.Drawing.Point(167, 119)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(21, 9)
+        Me.lblVersion.TabIndex = 10
+        Me.lblVersion.Text = "1.0.0"
+        '
         'CMDLauncher
         '
         Me.AcceptButton = Me.btnSave
@@ -319,6 +331,7 @@ Partial Class CMDLauncher
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(186, 128)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.grpLaunch)
         Me.Controls.Add(Me.grpLocation)
         Me.Controls.Add(Me.grpLaunchMethod)
@@ -343,8 +356,9 @@ Partial Class CMDLauncher
         Me.grpLaunch.ResumeLayout(False)
         Me.grpLaunch.PerformLayout()
         Me.ResumeLayout(False)
-
+        Me.PerformLayout()
     End Sub
+    Private lblVersion As System.Windows.Forms.Label
     Friend WithEvents btnSave As System.Windows.Forms.Button
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents grpFlag As System.Windows.Forms.GroupBox

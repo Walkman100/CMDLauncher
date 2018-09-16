@@ -25,6 +25,7 @@ Public Class CMDLauncher
                 QuitQuitQuit()
             End If
         Next
+        lblVersion.Text = My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor & "." & My.Application.Info.Version.Build
     End Sub
 
     Sub CheckInstDir()
