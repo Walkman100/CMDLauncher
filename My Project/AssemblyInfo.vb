@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Launches bat files in CMD (Open With)")> 
 <Assembly: AssemblyCompany("WalkmanOSS")> 
 <Assembly: AssemblyProduct("CMDLauncher")> 
-<Assembly: AssemblyCopyright("FOSS from Walkman 2014-15")> 
+<Assembly: AssemblyCopyright("FOSS from Walkman 2014-21")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
